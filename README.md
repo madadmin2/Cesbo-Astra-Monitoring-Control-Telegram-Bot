@@ -14,13 +14,13 @@ Access Control: Whitelist system to ensure only authorized users can control the
 🛠 Installation
 Clone the repository:
 
-Bash
+*************************************************************
 git clone https://github.com/madadmin2/astra-telegram-bot.git
 cd astra-telegram-bot
 Install dependencies:
 
-Bash
 pip install pyTelegramBotAPI requests
+*************************************************************
 Edit bot.py and fill in your:
 
 API_TOKEN (from @BotFather)
