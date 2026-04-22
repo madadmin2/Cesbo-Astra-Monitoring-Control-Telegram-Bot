@@ -42,3 +42,8 @@ If this bot helps you manage your streams and you'd like to support my work, you
 
 * [💸 Support via Revolut](https://revolut.me/iliyapereshki)
 * [🅿️ Support via PayPal](https://paypal.me/iliapereshki)
+
+#### ₿ Crypto Addresses:
+**USDT (TRC20):** `TP6dBhKT9w6n625mVEtaaRjYHHKMWG1DGs`
+ 
+**BTC:** `15JVVYuLdbcL3zgumvFXSxCYReprQdm9YQ`
