@@ -35,3 +35,10 @@ Run the bot:
 
 Bash
 python3 bot.py
+
+## Support the Project 🍺
+
+If this bot helps you manage your streams and you'd like to support my work, you can buy me a beer here:
+
+* [💸 Support via Revolut](https://revolut.me/iliyapereshki)
+* [🅿️ Support via PayPal](https://paypal.me/iliapereshki)
