@@ -177,9 +177,53 @@ def details_callback(call):
         types.InlineKeyboardButton("🔄 Restart", callback_data=f"cmd_restart_{sid}"),
         types.InlineKeyboardButton("⏯ Toggle On/Off", callback_data=f"cmd_toggle_{sid}")
     )
+    # ADDED: INPUTS BUTTON
+    markup.add(types.InlineKeyboardButton("🔗 Inputs", callback_data=f"list_inputs_{sid}"))
     markup.add(types.InlineKeyboardButton("⬅️ Back to List", callback_data=f"group_{current_group}"))
     
     bot.edit_message_text(text, call.message.chat.id, call.message.message_id, reply_markup=markup, parse_mode="Markdown")
+
+# --- INPUT SELECTION LOGIC ---
+@bot.callback_query_handler(func=lambda c: c.data.startswith("list_inputs_"))
+def list_inputs_callback(call):
+    if not is_authorized(call.from_user.id): return
+    sid = call.data.split("_")[2]
+    streams = get_stream_list()
+    s_config = next((s for s in streams if s.get("id") == sid), None)
+    
+    if not s_config or "input" not in s_config:
+        bot.answer_callback_query(call.id, "❌ No inputs found.")
+        return
+
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    inputs = s_config.get("input", [])
+    for i, inp_url in enumerate(inputs):
+        short_url = (inp_url[:40] + '..') if len(inp_url) > 40 else inp_url
+        markup.add(types.InlineKeyboardButton(f"🔹 Input {i+1}: {short_url}", callback_data=f"setinput_{sid}_{i}"))
+    
+    markup.add(types.InlineKeyboardButton("⬅️ Back", callback_data=f"details_{sid}"))
+    bot.edit_message_text("Select active input:", call.message.chat.id, call.message.message_id, reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda c: c.data.startswith("setinput_"))
+def set_input_callback(call):
+    if not is_authorized(call.from_user.id): return
+    parts = call.data.split("_")
+    sid, idx = parts[1], int(parts[2])
+    
+    streams = get_stream_list()
+    s_config = next((s for s in streams if s.get("id") == sid), None)
+    
+    if s_config:
+        inputs = s_config.get("input", [])
+        if idx < len(inputs):
+            selected = inputs.pop(idx)
+            inputs.insert(0, selected)
+            s_config["input"] = inputs
+            send_astra_cmd({"cmd": "set-stream", "id": sid, "stream": s_config})
+            bot.answer_callback_query(call.id, "✅ Input switched!")
+    
+    time.sleep(1)
+    details_callback(call)
 
 @bot.callback_query_handler(func=lambda c: c.data.startswith("cmd_"))
 def handle_commands(call):
