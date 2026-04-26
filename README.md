@@ -1,15 +1,17 @@
 # Cesbo-Astra-Monitoring-Control-Telegram-Bot
 A lightweight Python bot designed to monitor and manage streams in Cesbo Astra. It provides real-time alerts and a user-friendly interface to manage your headend directly from Telegram.
 🚀 Features
-Real-time Alerts: Notifies you instantly if a stream goes down (with a 30-second anti-spam delay).
-
-Group Management: Automatically categorizes streams based on your Astra groups.
-
-Stream Control: Restart or Toggle (On/Off) streams via inline buttons.
-
-Detailed Stats: View bitrate, CC errors, and PES errors for each stream.
-
-Access Control: Whitelist system to ensure only authorized users can control the bot.
+- **Real-time Alerts:** Notifies you instantly if a stream goes down (with a 30-second anti-spam delay).
+- 
+- **Group Management:** Automatically categorizes streams based on your Astra groups.
+- 
+- **Input Switching:** (NEW!) View and switch between multiple stream inputs directly from the interface.
+- 
+- **Stream Control:** Restart or Toggle (On/Off) streams via inline buttons.
+- 
+- **Detailed Stats:** View bitrate, CC errors, and PES errors for each stream.
+- 
+- **Access Control:** Whitelist system to ensure only authorized users can control the bot.
 
 🛠 Installation
 Clone the repository:
